@@ -71,8 +71,13 @@ export class OfertasService {
 		})
 		.then(( ofertas: Array<Oferta>) =>{
 			console.log('Then 2')
+			return new Promise((resolve2, reject2) =>{
+				setTimeout(() => { resolve2( ofertas ) },3000)
+			})
+		})
+		.then((ofertas: Array<Oferta>) =>{
+			console.log('Then 3')
 			return ofertas
 		})
-
 	}
 }
