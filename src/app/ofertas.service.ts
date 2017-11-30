@@ -46,9 +46,7 @@ export class OfertasService {
 				{url: "/assets/ofertas/3/img1.jpg"},
 				{url: "/assets/ofertas/3/img2.jpg"},
 				{url: "/assets/ofertas/3/img3.jpg"},
-				{url: "/assets/ofertas/3/img4.jpg"},
-				{url: "/assets/ofertas/3/img5.jpg"},
-				{url: "/assets/ofertas/3/img6.jpg"}
+				{url: "/assets/ofertas/3/img4.jpg"}
 			]
 		}
 	]
