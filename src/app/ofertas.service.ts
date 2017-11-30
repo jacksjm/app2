@@ -58,7 +58,12 @@ export class OfertasService {
 	public getOfertas2(): Promise<Array<Oferta>>{
 		return new Promise((resolve, reject) => {
 			//algum tipo de processamento, que ao finalizar chama um resolve ou reject
-			resolve( this.ofertas )
+			let deu_certo: boolean = false
+			if(deu_certo){
+				resolve( this.ofertas )
+			}else{
+				reject( { codigo_erro: 404, mensagem_erro: 'Servidor não encontrado' } )
+			}
 		} )
 	}
 }
