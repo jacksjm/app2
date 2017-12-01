@@ -11,7 +11,7 @@ export class OfertasService {
 
 	public getOfertas(): Promise<Array<Oferta>> {
 		//Efetua uma requisição HTTP e retorna um promisse Array<Oferta>
-		return this.http.get('http://localhost:3000/ofertas')
+		return this.http.get('http://localhost:3000/ofertas?destaque=true')
 			.toPromise()
 			.then( ( resposta: any ) => resposta.json() )
 	}
