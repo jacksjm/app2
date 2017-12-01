@@ -20,16 +20,15 @@ export class OfertaComponent implements OnInit {
 	  //this.route.snapshot.params.id
 	  //Recuperação com Subscribe
 	  //this.route.params.subscribe((parametro: any)=>{console.log(parametro)})
-	/*this.ofertaService.getOfertaId(this.route.snapshot.params.id)
+	this.ofertaService.getOfertaPorId(this.route.snapshot.params["id"])
 	.then(
-		( ofertas: Array<Oferta> ) => {
-				this.oferta = ofertas[0]
-				console.log(this.oferta)
+		( ofertas: Oferta ) => {
+				this.oferta = ofertas
 			}
 	)
 	.catch(
 		( param: any ) => { console.log( param ) }
-	)*/
+	)
   }
 
 }
