@@ -1,69 +1,29 @@
+import { Http } from '@angular/http'
+import { Injectable } from '@angular/core'
 import { Oferta } from "./shared/oferta.model"
+import { URL_API } from "./app.api"
 
+//import 'rxjs/add/operator/toPromise'
+
+@Injectable()
 export class OfertasService {
 
-	public ofertas: Array<Oferta> = [
-		{
-			id: 1,
-			categoria: "restaurante",
-			titulo: "Super Burger",
-			descricao_oferta: "Rodízio de Mini-hambúrger com opção de entrada.",
-			anunciante: "Original Burger",
-			valor: 29.90,
-			destaque: true,
-			imagens: [
-				{url: "/assets/ofertas/1/img1.jpg"},
-				{url: "/assets/ofertas/1/img2.jpg"},
-				{url: "/assets/ofertas/1/img3.jpg"},
-				{url: "/assets/ofertas/1/img4.jpg"}
-			]
-		},
-		{
-			id: 2,
-			categoria: "restaurante",
-			titulo: "Cozinha Mexicana",
-			descricao_oferta: "Almoço ou Jantar com Rodízio Mexicano delicioso.",
-			anunciante: "Mexicana",
-			valor: 32.90,
-			destaque: true,
-			imagens: [
-				{url: "/assets/ofertas/2/img1.jpg"},
-				{url: "/assets/ofertas/2/img2.jpg"},
-				{url: "/assets/ofertas/2/img3.jpg"},
-				{url: "/assets/ofertas/2/img4.jpg"}
-			]
+	constructor(private http: Http){}
 
-		},
-		{
-			id: 4,
-			categoria: "diversao",
-			titulo: "Estância das águas",
-			descricao_oferta: "Diversão garantida com piscinas, trilhas e muito mais.",
-			anunciante: "Estância das águas",
-			valor: 31.90,
-			destaque: true,
-			imagens: [
-				{url: "/assets/ofertas/3/img1.jpg"},
-				{url: "/assets/ofertas/3/img2.jpg"},
-				{url: "/assets/ofertas/3/img3.jpg"},
-				{url: "/assets/ofertas/3/img4.jpg"}
-			]
-		}
-	]
-
-	public getOfertas(): Array<Oferta> {
-		return this.ofertas
+	public getOfertas(): Promise<Array<Oferta>> {
+		//Efetua uma requisição HTTP e retorna um promisse Array<Oferta>
+		return this.http.get(`${URL_API}?destaque=true`)
+			.toPromise()
+			.then( ( resposta: any ) => resposta.json() )
 	}
-
-	public getOfertas2(): Promise<Array<Oferta>>{
-		return new Promise((resolve, reject) => {
-			//algum tipo de processamento, que ao finalizar chama um resolve ou reject
-			let deu_certo: boolean = false
-			if(deu_certo){
-				resolve( this.ofertas )
-			}else{
-				reject( { codigo_erro: 404, mensagem_erro: 'Servidor não encontrado' } )
-			}
-		} )
+	public getOfertasPorCategorias(categoria: string): Promise<Array<Oferta>> {
+		return this.http.get(`${URL_API}?categoria=${categoria}`)
+			.toPromise()
+			.then( ( resposta: any ) => resposta.json() )
+	}
+	public getOfertaPorId(id: number): Promise<Oferta>{
+		return this.http.get(`${URL_API}?id=${id}`)
+		.toPromise()
+		.then( ( resposta: any ) => resposta.json().shift() )
 	}
 }
