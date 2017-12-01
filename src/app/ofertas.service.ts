@@ -2,7 +2,7 @@ import { Http } from '@angular/http'
 import { Injectable } from '@angular/core'
 import { Oferta } from "./shared/oferta.model"
 
-import 'rxjs/add/operator/toPromise'
+//import 'rxjs/add/operator/toPromise'
 
 @Injectable()
 export class OfertasService {
@@ -15,5 +15,9 @@ export class OfertasService {
 			.toPromise()
 			.then( ( resposta: any ) => resposta.json() )
 	}
-
+	public getOfertasPorCategorias(categoria: string): Promise<Array<Oferta>> {
+		return this.http.get(`http://localhost:3000/ofertas?categoria=${categoria}`)
+			.toPromise()
+			.then( ( resposta: any ) => resposta.json() )
+	}
 }
