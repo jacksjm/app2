@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { OfertasService } from '../ofertas.service';
 import { Oferta } from '../shared/oferta.model'
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx'
 import { Observer } from 'rxjs/Observer';
+import { Subscription } from 'rxjs/Subscription';
+
+import 'rxjs/Rx'
+import { Subscribable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-oferta',
@@ -12,9 +15,11 @@ import { Observer } from 'rxjs/Observer';
   styleUrls: ['./oferta.component.css'],
   providers: [ OfertasService ]
 })
-export class OfertaComponent implements OnInit {
+export class OfertaComponent implements OnInit, OnDestroy {
 
   public oferta: Oferta
+  private tempoObservableSubscription: Subscription
+  private meuObservableTesteSubscription: Subscription
 
   constructor(private route: ActivatedRoute, private ofertaService: OfertasService ) { }
 
@@ -32,17 +37,19 @@ export class OfertaComponent implements OnInit {
 	.catch(
 		( param: any ) => { console.log( param ) }
 	)
-/*
+
+	//---- Observable de Timer ----
 	this.route.params.subscribe(
 		(parametro: any) => {console.log(parametro)},
 		(erro: any) => {console.log(erro)},
 		() => {console.log('Processamento concluído')}
 	)
 
-	let tempo = Observable.interval(500)
+	let tempo = Observable.interval(2000)
 
-	tempo.subscribe((intervalo: number) => { console.log(intervalo)})*/
+	this.tempoObservableSubscription = tempo.subscribe((intervalo: number) => { console.log(intervalo)})
 
+	//---- Observable criado do começo ----
 	//Observable {observável}
 	let meuObservableTeste = Observable.create((observer: Observer<number>) => {
 		observer.next(1)
@@ -53,11 +60,16 @@ export class OfertaComponent implements OnInit {
 	})
 
 	//Observable {observador}
-	meuObservableTeste.subscribe(
+	this.meuObservableTesteSubscription = meuObservableTeste.subscribe(
 		( resultado: number ) => console.log(resultado + 10), //Next
 		( error: string ) => console.log(error), //Error
 		() => console.log('Stream finalizada com sucesso') //Complete
 	)
+  }
+
+  ngOnDestroy(){
+	this.tempoObservableSubscription.unsubscribe()
+	this.meuObservableTesteSubscription.unsubscribe()
   }
 
 }
