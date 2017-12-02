@@ -29,6 +29,12 @@ export class OfertaComponent implements OnInit {
 	.catch(
 		( param: any ) => { console.log( param ) }
 	)
+/*
+	this.route.params.subscribe(
+		(parametro: any) => {console.log(parametro)},
+		(erro: any) => {console.log(erro)},
+		() => {console.log('Processamento concluído')}
+	)*/
   }
 
 }
