@@ -18,7 +18,7 @@ export class OndeFicaComponent implements OnInit {
 			) { }
 
 	ngOnInit() {
-		this.ofertasService.getComoUsarOfertaPorId(this.route.parent.snapshot.params['id'])
+		this.ofertasService.getOndeFicaOfertaPorId(this.route.parent.snapshot.params['id'])
 		.then( ( resposta: string ) => { this.ondeFica = resposta} )
 	}
 
