@@ -36,11 +36,11 @@ export class OfertaComponent implements OnInit {
 		(parametro: any) => {console.log(parametro)},
 		(erro: any) => {console.log(erro)},
 		() => {console.log('Processamento concluído')}
-	)*/
+	)
 
 	let tempo = Observable.interval(500)
 
-	tempo.subscribe((intervalo: number) => { console.log(intervalo)})
+	tempo.subscribe((intervalo: number) => { console.log(intervalo)})*/
   }
 
 }
