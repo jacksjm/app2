@@ -15,5 +15,8 @@ export class TopoComponent implements OnInit {
   public pesquisa(event: Event): void {
 	  console.log((<HTMLInputElement>event.target).value)
   }
+  public pesquisa2(termoDaBusca: string): void {
+	console.log(termoDaBusca)
+}
 
 }
