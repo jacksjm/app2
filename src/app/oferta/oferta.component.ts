@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { OfertasService } from '../ofertas.service';
 import { Oferta } from '../shared/oferta.model'
@@ -9,7 +9,7 @@ import { Oferta } from '../shared/oferta.model'
   styleUrls: ['./oferta.component.css'],
   providers: [ OfertasService ]
 })
-export class OfertaComponent implements OnInit {
+export class OfertaComponent implements OnInit, OnDestroy {
 
   public oferta: Oferta
 
@@ -29,6 +29,9 @@ export class OfertaComponent implements OnInit {
 	.catch(
 		( param: any ) => { console.log( param ) }
 	)
+  }
+
+  ngOnDestroy(){
   }
 
 }
