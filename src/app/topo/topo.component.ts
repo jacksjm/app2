@@ -25,7 +25,9 @@ export class TopoComponent implements OnInit, OnDestroy {
   public pesquisa2(termoDaBusca: string): void {
 	this.ofertas = this.ofertasService.pesquisaOfertas(termoDaBusca)
 	this.ofertas.subscribe(
-		(ofertas: Array<Oferta>) => console.log(ofertas)
+		(ofertas: Array<Oferta>) => console.log(ofertas),
+		(erro: any) => console.log('Erro status', erro.status),
+		() => { console.log('Fluxo de eventos completo')}
 	)
 }
 
