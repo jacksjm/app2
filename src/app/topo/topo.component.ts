@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
 import { Observable } from 'rxjs/Observable';
 import { Oferta } from '../shared/oferta.model';
+import { Subject } from 'rxjs/Subject';
+
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-topo',
@@ -12,23 +15,23 @@ import { Oferta } from '../shared/oferta.model';
 export class TopoComponent implements OnInit, OnDestroy {
 
   public ofertas: Observable<Array<Oferta>>
+  private subjectPesquisa: Subject<string> = new Subject<string>()
 
   constructor(private ofertasService: OfertasService ) { }
 
   ngOnInit() {
+	this.ofertas = this.subjectPesquisa //retorno Oferta[]
+		.switchMap( (termo: string) => {
+			console.log('req')
+		  return this.ofertasService.pesquisaOfertas(termo)
+		})
+
+	this.ofertas.subscribe((ofertas: Array<Oferta>) => console.log(ofertas))
   }
   ngOnDestroy() {
   }
-  public pesquisa(event: Event): void {
-	  console.log((<HTMLInputElement>event.target).value)
+  public pesquisa(termoDaBusca: string): void {
+	console.log('Key Up: ',termoDaBusca)
+    this.subjectPesquisa.next(termoDaBusca)
   }
-  public pesquisa2(termoDaBusca: string): void {
-	this.ofertas = this.ofertasService.pesquisaOfertas(termoDaBusca)
-	this.ofertas.subscribe(
-		(ofertas: Array<Oferta>) => console.log(ofertas),
-		(erro: any) => console.log('Erro status', erro.status),
-		() => { console.log('Fluxo de eventos completo')}
-	)
-}
-
 }
