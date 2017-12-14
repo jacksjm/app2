@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 @Component({
@@ -34,6 +35,10 @@ export class TopoComponent implements OnInit, OnDestroy {
 			}else{
 				return this.ofertasService.pesquisaOfertas(termo)
 			}
+		})
+		.catch( ( err: any ) => {
+			console.log( err )
+			return Observable.of<Array<Oferta>>([])
 		})
 
 	this.ofertas.subscribe((ofertas: Array<Oferta>) => console.log(ofertas))
