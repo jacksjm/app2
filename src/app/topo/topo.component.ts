@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/of';
 
 @Component({
@@ -23,7 +24,8 @@ export class TopoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 	this.ofertas = this.subjectPesquisa //retorno Oferta[]
-		.debounceTime(1000)
+		.debounceTime(1000) //executa a ação após 1 segundo
+		.distinctUntilChanged()
 		.switchMap( (termo: string) => {
 			console.log('req')
 			if(termo.trim() === ''){
