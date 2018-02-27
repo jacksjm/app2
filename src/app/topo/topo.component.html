@@ -9,7 +9,10 @@
 			</div>
 			<div class="col-md-6">
 				<!--<input type="text" (keyup)="pesquisa($event)" class="form-control" placeholder="Pesquise por ofertas..."/>-->
-				<input type="text" #termoDaPesquisa (keyup)="pesquisa2(termoDaPesquisa.value)" class="form-control" placeholder="Pesquise por ofertas..."/>
+				<input type="text" #termoDaPesquisa (keyup)="pesquisa(termoDaPesquisa.value)" class="form-control" placeholder="Pesquise por ofertas..."/>
+				<ul class="list-group" style="position: absolute">
+					<li class="list-group-item" *ngFor="let oferta of ofertas2">{{ oferta.titulo }}</li>
+				  </ul>
 			</div>
 			<div class="col-md-2">
 				<a a href="#"><img src="/assets/carrinho.png" /></a>
