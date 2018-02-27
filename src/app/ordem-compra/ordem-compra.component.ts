@@ -10,6 +10,9 @@ import { Pedido } from '../shared/pedido.model';
 })
 export class OrdemCompraComponent implements OnInit {
 
+  //Pedido
+  public pedido: Pedido = new Pedido('','','','')
+
   public endereco: string = ''
   public numero: string = ''
   public complemento:  string = ''
@@ -88,11 +91,21 @@ export class OrdemCompraComponent implements OnInit {
 	this.habilitaForm()
   }
 
-  public habilitaForm(): void{
+  public habilitaForm(): void {
 	if(this.enderecoValido === true && this.numeroValido === true && this.formaPagamentoValido === true){
 		this.formEstado = ''
 	}else{
 		this.formEstado = 'disabled'
 	}
+  }
+
+  public confirmarCompra(): void {
+
+	this.pedido.endereco = this.endereco
+	this.pedido.numero = this.numero
+	this.pedido.complemento = this.complemento
+	this.pedido.formaPagamento = this.formaPagamento
+
+	this.ordemCompraService.efetivarCompra(this.pedido)
   }
 }
