@@ -107,5 +107,6 @@ export class OrdemCompraComponent implements OnInit {
 	this.pedido.formaPagamento = this.formaPagamento
 
 	this.ordemCompraService.efetivarCompra(this.pedido)
+		.subscribe()
   }
 }
