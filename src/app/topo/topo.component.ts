@@ -15,7 +15,6 @@ import '../util/rxjs-extensions'
 export class TopoComponent implements OnInit, OnDestroy {
 
   public ofertas: Observable<Array<Oferta>>
-  public ofertas2: Array<Oferta>
   private subjectPesquisa: Subject<string> = new Subject<string>()
 
   constructor(private ofertasService: OfertasService ) { }
@@ -25,7 +24,6 @@ export class TopoComponent implements OnInit, OnDestroy {
 		.debounceTime(500) //executa a ação após 1 segundo
 		.distinctUntilChanged()
 		.switchMap( (termo: string) => {
-			console.log('req')
 			if(termo.trim() === ''){
 				//retorna um Observable de array de ofertas vazio
 				return Observable.of<Array<Oferta>>([])
@@ -38,14 +36,13 @@ export class TopoComponent implements OnInit, OnDestroy {
 			return Observable.of<Array<Oferta>>([])
 		})
 
-	this.ofertas.subscribe((ofertas: Array<Oferta>) => {
-		this.ofertas2 = ofertas
-	})
   }
   ngOnDestroy() {
   }
   public pesquisa(termoDaBusca: string): void {
-	console.log('Key Up: ',termoDaBusca)
     this.subjectPesquisa.next(termoDaBusca)
+  }
+  public limpaPesquisa(): void {
+	  this.subjectPesquisa.next('')
   }
 }
