@@ -70,7 +70,7 @@
 
         <div class="form-group col-md-6">
 		  <input type="text"
-		  		class="form-control is-invalid"
+				  class="form-control {{ enderecoValido ? 'is-valid' : 'is-invalid'}}"
 				  placeholder="Endereço"
 				  autocomplete="off"
 				  minlength="5"
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group col-md-2">
-		  <input type="text" class="form-control is-valid" placeholder="Número" autocomplete="off" minlength="1" required
+		  <input type="text" class="form-control {{ numeroValido ? 'is-valid' : 'is-invalid'}}" placeholder="Número" autocomplete="off" minlength="1" required
 				  [value]="numero"
 				  #inputNumero
 				  (input)="atualizaNumero(inputNumero.value)">
@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group col-md-4">
-		  <input type="text" class="form-control" placeholder="Complemento" autocomplete="off" [value]="complemento"
+		  <input type="text" class="form-control {{ complementoValido ? 'is-valid' : ''}}" placeholder="Complemento" autocomplete="off" [value]="complemento"
 		  #inputComplemento
 		  (input)="atualizaComplemento(inputComplemento.value)">
         </div>
@@ -105,7 +105,7 @@
       <div class="form-row">
 
         <div class="form-group col-md-3">
-		  <select class="form-control is-invalid"
+		  <select class="form-control {{ formaPagamentoValido ? 'is-valid' : 'is-invalid'}}"
 					#selectFormaPagamento
 		  			(change)="atualizaFormaPagamento(selectFormaPagamento.value)">
             <option value="">Selecione uma opção</option>
