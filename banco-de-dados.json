@@ -195,6 +195,20 @@
       "complemento": "",
       "formaPagamento": "dinheiro",
       "id": 1
+    },
+    {
+      "endereco": "Rua X",
+      "numero": "0",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 2
+    },
+    {
+      "endereco": "Rua X",
+      "numero": "0",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 3
     }
   ]
 }

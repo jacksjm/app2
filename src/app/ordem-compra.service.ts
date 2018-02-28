@@ -12,7 +12,7 @@ export class OrdemCompraService {
 
 	constructor(private http: Http) {}
 
-	public efetivarCompra(pedido: Pedido): Observable<any> {
+	public efetivarCompra(pedido: Pedido): Observable<number> {
 
 		let headers: Headers = new Headers()
 
@@ -23,6 +23,6 @@ export class OrdemCompraService {
 			JSON.stringify(pedido),
 			new RequestOptions({ headers: headers })
 		)
-		.map((resposta: Response) => console.log( resposta.json() ) )
+		.map((resposta: Response) => resposta.json().id )
 	}
 }
