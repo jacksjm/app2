@@ -223,6 +223,20 @@
       "complemento": "",
       "formaPagamento": "dinheiro",
       "id": 5
+    },
+    {
+      "endereco": "Rua XYZ",
+      "numero": "123",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 6
+    },
+    {
+      "endereco": "Rua ABC",
+      "numero": "987",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 7
     }
   ]
 }

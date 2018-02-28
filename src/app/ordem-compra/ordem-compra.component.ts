@@ -13,6 +13,7 @@ export class OrdemCompraComponent implements OnInit {
 
   @ViewChild('formulario') public formulario: NgForm
 
+  public idPedidoCompra: number
 
   constructor(private ordemCompraService: OrdemCompraService) { }
 
@@ -29,7 +30,7 @@ export class OrdemCompraComponent implements OnInit {
 
 	this.ordemCompraService.efetivarCompra(pedido)
 		.subscribe( (idPedido: number) => {
-			console.log(idPedido)
+			this.idPedidoCompra = idPedido
 		} )
   }
 }
