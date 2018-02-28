@@ -26,7 +26,6 @@ export class OrdemCompraComponent implements OnInit {
 	) { }
 
   ngOnInit() {
-	console.log(this.carrinhoService.exibirItens())
   }
 
   public confirmarCompra(): void {

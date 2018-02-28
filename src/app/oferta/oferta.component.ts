@@ -26,7 +26,6 @@ export class OfertaComponent implements OnInit, OnDestroy {
 	  //this.route.snapshot.params.id
 	  //Recuperação com Subscribe
 	  //this.route.params.subscribe((parametro: any)=>{console.log(parametro)})
-	console.log(this.carrinhoService.exibirItens())
 	this.route.params.subscribe((parametros: Params) => {
 		this.ofertaService.getOfertaPorId(parametros.id)
 		.then(
@@ -41,6 +40,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+  }
+  public adicionarItemCarrinho():void{
+	this.carrinhoService.incluirItem(this.oferta)
   }
 
 }
