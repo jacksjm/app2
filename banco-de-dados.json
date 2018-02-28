@@ -244,6 +244,13 @@
       "complemento": "",
       "formaPagamento": "dinheiro",
       "id": 8
+    },
+    {
+      "endereco": "Rua ABC",
+      "numero": "0",
+      "complemento": null,
+      "formaPagamento": "debito",
+      "id": 9
     }
   ]
 }
