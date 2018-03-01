@@ -251,6 +251,45 @@
       "complemento": null,
       "formaPagamento": "debito",
       "id": 9
+    },
+    {
+      "endereco": "Rua Albano",
+      "numero": "1234",
+      "complemento": null,
+      "formaPagamento": "debito",
+      "itens": [
+        {
+          "id": 1,
+          "img": {
+            "url": "/assets/ofertas/1/img1.jpg"
+          },
+          "titulo": "Super Burger",
+          "descricao_oferta": "Rodízio de Mini-hambúrger com opção de entrada.",
+          "valor": 29.9,
+          "quantidade": 1
+        },
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricao_oferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 1
+        },
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricao_oferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 1
+        }
+      ],
+      "id": 10
     }
   ]
 }
