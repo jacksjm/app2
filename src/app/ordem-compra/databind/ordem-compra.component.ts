@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service';
-import { Pedido } from '../shared/pedido.model';
+import { OrdemCompraService } from '../../ordem-compra.service';
+import { Pedido } from '../../shared/pedido.model';
 
 @Component({
   selector: 'app-ordem-compra',
