@@ -51,6 +51,7 @@ export class OrdemCompraComponent implements OnInit {
 			this.ordemCompraService.efetivarCompra(pedido)
 			  .subscribe( (idPedido: number) => {
 				  this.idPedidoCompra = idPedido
+				  this.carrinhoService.limparCarrinho()
 			  })
 		  }else{
 			alert('Você não selecionou nenhum item!')
