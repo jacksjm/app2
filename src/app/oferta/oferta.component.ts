@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 import { OfertasService } from '../ofertas.service';
-import { Oferta } from '../shared/oferta.model'
+import { CarrinhoService } from '../carrinho.service';
+
+import { Oferta } from '../shared/oferta.model';
 
 @Component({
   selector: 'app-oferta',
@@ -13,7 +15,11 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   public oferta: Oferta
 
-  constructor(private route: ActivatedRoute, private ofertaService: OfertasService ) { }
+  constructor(
+	  private route: ActivatedRoute,
+	  private ofertaService: OfertasService,
+	  private carrinhoService: CarrinhoService
+	) { }
 
   ngOnInit() {
 	  //Recuperação com Snapshot
@@ -34,6 +40,10 @@ export class OfertaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+  }
+  public adicionarItemCarrinho():void{
+	this.carrinhoService.incluirItem(this.oferta)
+	console.log(this.carrinhoService.exibirItens())
   }
 
 }

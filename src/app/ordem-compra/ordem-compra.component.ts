@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service';
-import { Pedido } from '../shared/pedido.model';
+import { OrdemCompraService } from '../ordem-compra.service'
+import { Pedido } from '../shared/pedido.model'
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CarrinhoService } from '../carrinho.service';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -10,103 +13,44 @@ import { Pedido } from '../shared/pedido.model';
 })
 export class OrdemCompraComponent implements OnInit {
 
-  //Pedido
-  public pedido: Pedido = new Pedido('','','','')
+  public idPedidoCompra:number
 
-  public endereco: string = ''
-  public numero: string = ''
-  public complemento:  string = ''
-  public formaPagamento: string = ''
+  public itensCarrinho: Array<ItemCarrinho> = []
 
-  //controle de validação dos campos
-  public enderecoValido: boolean
-  public numeroValido: boolean
-  public complementoValido: boolean
-  public formaPagamentoValido: boolean
+  public formulario: FormGroup = new FormGroup({
+	  'endereco': new FormControl(null, [ Validators.required , Validators.minLength(3), Validators.maxLength(120) ]),
+	  'numero': new FormControl(null, [ Validators.required , Validators.minLength(1), Validators.maxLength(20) ]),
+	  'complemento': new FormControl(null),
+	  'formaPagamento': new FormControl(null, [ Validators.required ])
+  })
 
-
-  //estados primitivos dos campos (pristine)
-  public enderecoEstadoPrimitivo: boolean = true
-  public numeroEstadoPrimitivo: boolean = true
-  public complementoEstadoPrimitivo: boolean = true
-  public formaPagamentoEstadoPrimitivo: boolean = true
-
-  //controlar botão confirmar compra
-  public formEstado: string = 'disabled'
-
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  constructor(
+	  private ordemCompraService: OrdemCompraService,
+	  private carrinhoService: CarrinhoService
+	) { }
 
   ngOnInit() {
-	//this.ordemCompraService.efetivarCompra()
-  }
-
-  public atualizaEndereco(endereco: string): void {
-	  this.endereco = endereco
-	  //console.log(this.endereco)
-
-	  //se a string for maior que 3
-	  if (this.endereco.length > 3){
-		  this.enderecoValido = true
-	  }else{
-		  this.enderecoValido = false
-	  }
-
-	  this.enderecoEstadoPrimitivo = false
-	  this.habilitaForm()
-  }
-  public atualizaNumero(numero: string): void {
-	this.numero = numero
-	//console.log(this.numero)
-	 //se a string for maior que 0
-	if (this.numero.length > 0){
-		this.numeroValido = true
-	}else{
-		this.numeroValido = false
-	}
-	//console.log(this.numeroValido)
-	this.numeroEstadoPrimitivo = false
-	this.habilitaForm()
-  }
-  public atualizaComplemento(complemento: string): void {
-	this.complemento = complemento
-	//console.log(this.complemento)
-	if (this.complemento.length > 0 ){
-		this.complementoValido = true
-	}
-
-	this.complementoEstadoPrimitivo = false
-	this.habilitaForm()
-  }
-  public atualizaFormaPagamento(formaPagamento: string): void {
-	this.formaPagamento = formaPagamento
-	//console.log(this.formaPagamento)
-
-	if (this.formaPagamento.length > 0 ){
-		this.formaPagamentoValido = true
-	}else{
-		this.formaPagamentoValido = false
-	}
-
-	this.formaPagamentoEstadoPrimitivo = false
-	this.habilitaForm()
-  }
-
-  public habilitaForm(): void {
-	if(this.enderecoValido === true && this.numeroValido === true && this.formaPagamentoValido === true){
-		this.formEstado = ''
-	}else{
-		this.formEstado = 'disabled'
-	}
+	this.itensCarrinho = this.carrinhoService.exibirItens()
+	console.log(this.itensCarrinho)
   }
 
   public confirmarCompra(): void {
+	  if (this.formulario.status === 'INVALID'){
+		  this.formulario.get('endereco').markAsTouched()
+		  this.formulario.get('numero').markAsTouched()
+		  this.formulario.get('complemento').markAsTouched()
+		  this.formulario.get('formaPagamento').markAsTouched()
+	  }else{
+		  let pedido = new Pedido(
+			  this.formulario.value.endereco,
+			  this.formulario.value.numero,
+			  this.formulario.value.complemento,
+			  this.formulario.value.formaPagamento)
 
-	this.pedido.endereco = this.endereco
-	this.pedido.numero = this.numero
-	this.pedido.complemento = this.complemento
-	this.pedido.formaPagamento = this.formaPagamento
-
-	this.ordemCompraService.efetivarCompra(this.pedido)
-		.subscribe()
+		  this.ordemCompraService.efetivarCompra(pedido)
+			.subscribe( (idPedido: number) => {
+				this.idPedidoCompra = idPedido
+			})
+	  }
   }
 }
